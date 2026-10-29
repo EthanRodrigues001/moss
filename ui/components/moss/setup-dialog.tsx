@@ -7,10 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { api } from "@/lib/moss-api";
 import type { ProjectSummary, SelfTest, SetupProgress, SetupReport, TexStatus } from "@/lib/types";
-import { Aurora } from "@/components/dithercn/aurora";
 import { MossMark } from "./moss-mark";
-
-const SKY = { "--dither-paper": "var(--background)" } as React.CSSProperties;
 
 type Step = "check" | "installing" | "test" | "done";
 
@@ -136,16 +133,14 @@ function Body({ onTexChange, onTour, onOverleaf, onAgents, close }: Props & { cl
 
   return (
     <div className="flex flex-col">
-      {/* Banner: the aurora from the welcome screen under a dark veil, with the logo and title. */}
-      <div style={SKY} className="relative isolate flex items-center gap-4 overflow-hidden border-b px-6 py-7">
-        <div aria-hidden className="pointer-events-none absolute inset-0 -z-20">
-          <Aurora mask="top" height={0.5} curtains={3} className="absolute inset-0" />
-        </div>
-        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-background/85 via-background/60 to-background/80" />
+      {/* Banner: the logo's own artwork (dark base, tilted page, blue sigma) with the logo and title on it. */}
+      <div className="relative isolate flex items-center gap-4 overflow-hidden border-b bg-[#1d1d21] px-6 py-7 text-white">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/setup-banner.svg" alt="" aria-hidden draggable={false} className="pointer-events-none absolute inset-0 -z-10 size-full object-cover object-right" />
         <MossMark className="size-16" />
         <div>
           <p className="text-xl font-semibold tracking-tight">Set up LaTeX</p>
-          <p className="text-sm text-muted-foreground">Moss compiles with a LaTeX install on this PC.</p>
+          <p className="text-sm text-white/70">Moss compiles with a LaTeX install on this PC.</p>
         </div>
       </div>
 
