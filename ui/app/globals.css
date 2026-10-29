@@ -1,0 +1,217 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-editor: var(--editor);
+  --color-foreground: var(--foreground);
+  --font-sans: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Cascadia Mono", "SF Mono", Consolas, ui-monospace, Menlo, monospace;
+  --font-heading: var(--font-sans);
+  --color-primary-hover: var(--primary-hover);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-error-surface: var(--error-surface);
+  --color-warning-surface: var(--warning-surface);
+  --color-sidebar-hover: var(--sidebar-hover);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+  --color-dither-ink: var(--dither-ink);
+  --color-dither-paper: var(--dither-paper);
+  --color-dither-blue: var(--dither-color-blue);
+  --color-dither-purple: var(--dither-color-purple);
+  --color-dither-green: var(--dither-color-green);
+  --color-dither-pink: var(--dither-color-pink);
+  --color-dither-orange: var(--dither-color-orange);
+  --color-dither-red: var(--dither-color-red);
+  --color-dither-grey: var(--dither-color-grey);
+}
+
+/* T3 Code theme. Values are the exact T3_CODE_LIGHT / T3_CODE_DARK roles:
+   canvas -> background, surface -> card/secondary/muted, accent -> primary,
+   border/input/focus as named, sidebar* as named. */
+:root {
+  --background: #fcfcfc;
+  --editor: #ffffff;
+  --foreground: #27272a;
+  --card: #ffffff;
+  --card-foreground: #27272a;
+  --popover: #ffffff;
+  --popover-foreground: #27272a;
+  --primary: #1b4ed8;
+  --primary-hover: #3160db;
+  --primary-foreground: #ffffff;
+  --secondary: #fafafa;
+  --secondary-foreground: #27272a;
+  --muted: #fafafa;
+  --muted-foreground: #71717b;
+  --accent: #f4f4f5;
+  --accent-foreground: #18181b;
+  --destructive: #c10007;
+  --error-surface: #fcebec;
+  --warning: #bb4d00;
+  --warning-foreground: #bb4d00;
+  --warning-surface: #fcf4e8;
+  --border: #e4e4e7;
+  --input: #d4d4d8;
+  --ring: #1b4ed8;
+  --chart-1: #1b4ed8;
+  --chart-2: #71717b;
+  --chart-3: #fe9a00;
+  --chart-4: #fb2c36;
+  --chart-5: #27272a;
+  --radius: 0.625rem;
+  --sidebar: #fafafa;
+  --sidebar-foreground: #27272a;
+  --sidebar-primary: #1b4ed8;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #ffffff;
+  --sidebar-accent-foreground: #27272a;
+  --sidebar-hover: #fcfcfc;
+  --sidebar-border: #e4e4e7;
+  --sidebar-ring: #1b4ed8;
+}
+
+.dark {
+  --background: #0a0a0a;
+  --editor: #111111;
+  --foreground: #f5f5f5;
+  --card: #111111;
+  --card-foreground: #f5f5f5;
+  --popover: #111111;
+  --popover-foreground: #f5f5f5;
+  --primary: #346bf1;
+  --primary-hover: #3061d9;
+  --primary-foreground: #ffffff;
+  --secondary: #111111;
+  --secondary-foreground: #f5f5f5;
+  --muted: #111111;
+  --muted-foreground: #818181;
+  --accent: #141414;
+  --accent-foreground: #f5f5f5;
+  --destructive: #ff6467;
+  --error-surface: #301214;
+  --warning: #ffb900;
+  --warning-foreground: #ffb900;
+  --warning-surface: #312108;
+  --border: #191919;
+  --input: #1e1e1e;
+  --ring: #346bf1;
+  --chart-1: #346bf1;
+  --chart-2: #818181;
+  --chart-3: #fe9a00;
+  --chart-4: #fb414a;
+  --chart-5: #f5f5f5;
+  --sidebar: #000000;
+  --sidebar-foreground: #f1f3f7;
+  --sidebar-primary: #346bf1;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #1a1b1b;
+  --sidebar-accent-foreground: #f5f5f5;
+  --sidebar-hover: #131313;
+  --sidebar-border: #141414;
+  --sidebar-ring: #346bf1;
+}
+
+/* Gutter dots for lint problems in the editor (their tooltip is set from the editor pane). */
+.moss-gutter-error,
+.moss-gutter-warning {
+  margin-left: 4px;
+  width: 8px !important;
+  height: 8px !important;
+  margin-top: 6px;
+  border-radius: 9999px;
+}
+.moss-gutter-error {
+  background: #ff6467;
+}
+.moss-gutter-warning {
+  background: #ffb900;
+}
+
+/*
+ * Monaco's small tooltips for its own buttons ("Close (Escape)" on Find) are drawn right over
+ * the button, so they took the mouse-up and the click never reached it. They are only labels:
+ * let the mouse pass through them.
+ */
+.context-view:has(.workbench-hover-container) {
+  pointer-events: none !important;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+  :root {
+    --dither-ink: var(--primary);
+    --dither-paper: var(--background);
+    --dither-cell: 3px;
+    --dither-color-blue: oklch(0.56 0.18 248);
+    --dither-color-purple: oklch(0.53 0.22 302);
+    --dither-color-green: oklch(0.58 0.15 152);
+    --dither-color-pink: oklch(0.58 0.21 355);
+    --dither-color-orange: oklch(0.64 0.17 52);
+    --dither-color-red: oklch(0.55 0.21 27);
+    --dither-color-grey: oklch(0.55 0 0);
+    --dither-bloom: 0.6;
+  }
+  .dark {
+    --dither-ink: var(--primary);
+    --dither-paper: var(--background);
+    --dither-cell: 3px;
+    --dither-color-blue: oklch(0.72 0.14 240);
+    --dither-color-purple: oklch(0.7 0.18 304);
+    --dither-color-green: oklch(0.78 0.17 152);
+    --dither-color-pink: oklch(0.74 0.17 354);
+    --dither-color-orange: oklch(0.79 0.15 62);
+    --dither-color-red: oklch(0.68 0.2 25);
+    --dither-color-grey: oklch(0.66 0 0);
+    --dither-bloom: 1;
+  }
+}

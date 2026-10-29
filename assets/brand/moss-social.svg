@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 640" width="1280" height="640" role="img" aria-label="Moss: a local-first LaTeX editor">
+  <title>Moss social preview (1280x640, the size GitHub asks for)</title>
+  <defs>
+    <radialGradient id="glow" cx="22%" cy="35%" r="70%">
+      <stop offset="0" stop-color="#346bf1" stop-opacity=".30"/>
+      <stop offset="1" stop-color="#346bf1" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1280" height="640" fill="#000"/>
+  <rect width="1280" height="640" fill="url(#glow)"/>
+  <image x="120" y="170" width="300" height="300" xlink:href="moss-logo.svg" href="moss-logo.svg"/>
+  <g font-family="'Segoe UI Variable Display', 'Segoe UI', system-ui, Arial, sans-serif" fill="#ffffff">
+    <text x="470" y="300" font-size="168" font-weight="700" letter-spacing="-6">Moss</text>
+    <text x="476" y="372" font-size="38" fill="#b8c4e6">A local-first LaTeX editor for Windows</text>
+    <text x="476" y="428" font-size="26" fill="#7f8db3">Compiles on your PC · Syncs with Overleaf · AI agents welcome</text>
+  </g>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Moss">
+  <title>Moss (small sizes: flat, no shadows)</title>
+  <defs>
+    <linearGradient id="s-tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4a7dff"/>
+      <stop offset="1" stop-color="#2858dc"/>
+    </linearGradient>
+  </defs>
+  <!-- the tile in the app's own blue, so it reads on black -->
+  <rect x="16" y="16" width="480" height="480" rx="120" fill="url(#s-tile)"/>
+  <!-- the page, with its lower-left corner folded over -->
+  <path d="M124 76H388V436H214L124 346Z" fill="#ffffff"/>
+  <path d="M124 346L214 346L214 436Z" fill="#b9c6ea"/>
+  <!-- the Sigma -->
+  <path d="M322 148H206L264 256L206 364H322" fill="none" stroke="#2858dc" stroke-width="40" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

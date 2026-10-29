@@ -1,0 +1,70 @@
+{
+  "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
+  "productName": "Moss",
+  "version": "0.1.0-beta.1",
+  "identifier": "dev.moss.app",
+  "build": {
+    "frontendDist": "../ui/out",
+    "devUrl": "http://localhost:3000",
+    "beforeDevCommand": "node scripts/prepare-sidecar.mjs && npm run ui:dev",
+    "beforeBuildCommand": "node scripts/prepare-sidecar.mjs --release && npm run ui:build"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "Moss",
+        "width": 1440,
+        "height": 900,
+        "minWidth": 960,
+        "minHeight": 640,
+        "resizable": true,
+        "fullscreen": false
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": [
+      "nsis"
+    ],
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "createUpdaterArtifacts": true,
+    "publisher": "Ethan Rodrigues",
+    "shortDescription": "Local-first LaTeX editor with Overleaf sync and agent tools",
+    "externalBin": [
+      "binaries/moss-mcp"
+    ],
+    "windows": {
+      "webviewInstallMode": {
+        "type": "downloadBootstrapper"
+      },
+      "nsis": {
+        "installMode": "currentUser",
+        "languages": [
+          "English"
+        ]
+      }
+    }
+  },
+  "mainBinaryName": "Moss",
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDhENzhFNEEzQjExRDRBNDQKUldSRVNoMnhvK1I0alYwWW1uYU5BOE95eHlYMDI2OW1Ta0pTUS9mZXZhTlM0d0xtbDhVUGJtejUK",
+      "endpoints": [
+        "https://github.com/EthanRodrigues001/moss/releases/download/updater/latest.json"
+      ],
+      "windows": {
+        "installMode": "passive"
+      }
+    }
+  }
+}

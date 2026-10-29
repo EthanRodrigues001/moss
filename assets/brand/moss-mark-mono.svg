@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Moss">
+  <title>Moss (single colour)</title>
+  <!-- Uses currentColor, so it takes the text colour in the app, a README, or a tray icon. -->
+  <defs>
+    <mask id="moss-mono-cut">
+      <rect width="512" height="512" fill="#fff"/>
+      <!-- the Sigma -->
+      <path d="M322 148H206L264 256L206 364H322" fill="none" stroke="#000" stroke-width="40" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- the fold: a thin cut between the page and its folded corner -->
+      <path d="M124 346L214 436" stroke="#000" stroke-width="10"/>
+    </mask>
+  </defs>
+  <g mask="url(#moss-mono-cut)" fill="currentColor">
+    <path d="M124 76H388V436H214L124 346Z"/>
+  </g>
+  <path d="M124 346H214V436Z" fill="currentColor" opacity=".45"/>
+</svg>

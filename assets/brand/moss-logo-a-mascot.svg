@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Moss">
+  <title>Moss (mascot)</title>
+  <defs>
+    <!-- #346bf1 is the app's primary blue (Compile / Add project); the tile brackets it. -->
+    <linearGradient id="moss-tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4a7ff5"/>
+      <stop offset="1" stop-color="#2858dc"/>
+    </linearGradient>
+    <linearGradient id="moss-body" gradientUnits="userSpaceOnUse" x1="0" y1="150" x2="0" y2="480">
+      <stop offset="0" stop-color="#f5f8ff"/>
+      <stop offset="1" stop-color="#c7d5ff"/>
+    </linearGradient>
+    <linearGradient id="moss-eye" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#25358a"/>
+      <stop offset="1" stop-color="#0e1650"/>
+    </linearGradient>
+    <clipPath id="moss-clip"><rect x="32" y="32" width="448" height="448" rx="112"/></clipPath>
+    <!-- one path, so there are no seams where shapes meet -->
+    <path id="moss-shape" d="M32 490V322.0A80 80 0 0 1 108.4 242.1A84 84 0 0 1 216.3 182.2A94 94 0 0 1 387.9 212.4A80 80 0 0 1 475.9 296.5A64 64 0 0 1 532.0 360.0V490Z"/>
+  </defs>
+  <rect x="32" y="32" width="448" height="448" rx="112" fill="url(#moss-tile)"/>
+  <g clip-path="url(#moss-clip)">
+    <use href="#moss-shape" transform="translate(-6 -34)" fill="#fff" fill-opacity=".17"/>
+    <use href="#moss-shape" fill="url(#moss-body)"/>
+    <!-- eyebrows -->
+    <path d="M174 304Q204 286 238 300" fill="none" stroke="#25358a" stroke-width="10" stroke-linecap="round"/>
+    <path d="M286 300Q320 286 350 304" fill="none" stroke="#25358a" stroke-width="10" stroke-linecap="round"/>
+    <!-- eyes -->
+    <ellipse cx="206" cy="360" rx="31" ry="40" fill="url(#moss-eye)"/>
+    <ellipse cx="318" cy="360" rx="31" ry="40" fill="url(#moss-eye)"/>
+    <circle cx="217" cy="343" r="10" fill="#fff"/>
+    <circle cx="329" cy="343" r="10" fill="#fff"/>
+  </g>
+</svg>

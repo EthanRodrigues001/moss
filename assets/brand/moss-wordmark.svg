@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 200" width="640" height="200" role="img" aria-label="Moss">
+  <title>Moss wordmark</title>
+  <!-- The logo and the name. The name is live text in the app's own font stack (Segoe UI on Windows). -->
+  <image x="10" y="20" width="160" height="160" href="moss-logo.svg"/>
+  <text x="200" y="128" font-family="'Segoe UI Variable Display', 'Segoe UI', system-ui, Arial, sans-serif" font-size="104" font-weight="700" letter-spacing="-3" fill="#ffffff">Moss</text>
+</svg>

@@ -1,0 +1,35 @@
+# Rust
+/target
+**/*.rs.bk
+
+# Node / Next.js
+node_modules
+/ui/.next
+/ui/out
+/ui/next-env.d.ts
+*.tsbuildinfo
+
+# Tauri
+/src-tauri/gen/schemas
+/src-tauri/target
+
+# Local Moss data and secrets
+.env
+.env.*
+!.env.example
+.moss/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Real documents used for local testing (never commit someone's thesis)
+/private-fixtures/
+
+# Copied from node_modules by ui/scripts/copy-vendor.mjs
+/ui/public/vendor
+/ui/.next-check
+/src-tauri/binaries
+.claude/

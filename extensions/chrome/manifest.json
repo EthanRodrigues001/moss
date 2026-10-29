@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Moss Connector",
+  "version": "0.1.0",
+  "description": "Send your Overleaf sign-in from Chrome to the Moss desktop app with one click. Nothing leaves your PC.",
+  "permissions": ["cookies"],
+  "host_permissions": [
+    "https://www.overleaf.com/*",
+    "http://127.0.0.1/*"
+  ],
+  "action": {
+    "default_title": "Connect Overleaf to Moss",
+    "default_popup": "popup.html"
+  }
+}
