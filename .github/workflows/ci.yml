@@ -16,6 +16,8 @@ jobs:
       - run: npm ci
         working-directory: ui
       - run: node scripts/bump-version.mjs --check
+      - run: npx next typegen
+        working-directory: ui
       - run: npx tsc --noEmit
         working-directory: ui
       - run: npm run lint
