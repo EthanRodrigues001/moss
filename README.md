@@ -3,12 +3,12 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/EthanRodrigues001/moss/releases"><img alt="Latest release" src="https://shieldcn.dev/github/release/EthanRodrigues001/moss.svg?variant=secondary&size=xs&height=20" /></a>
-  <a href="https://github.com/EthanRodrigues001/moss/releases"><img alt="Downloads" src="https://shieldcn.dev/github/dt/EthanRodrigues001/moss.svg?variant=secondary&size=xs&height=20" /></a>
-  <a href="LICENSE"><img alt="MIT license" src="https://shieldcn.dev/github/license/EthanRodrigues001/moss.svg?variant=secondary&size=xs&height=20" /></a>
-  <a href="https://github.com/EthanRodrigues001/moss/actions/workflows/ci.yml"><img alt="CI" src="https://shieldcn.dev/github/ci/EthanRodrigues001/moss.svg?workflow=ci.yml&variant=secondary&size=xs&height=20" /></a>
-  <a href="#install"><img alt="Windows x64" src="https://shieldcn.dev/badge/Windows-x64-0078d4.svg?logo=windows&variant=secondary&size=xs&height=20" /></a>
-  <a href="https://tauri.app"><img alt="Built with Tauri 2" src="https://shieldcn.dev/badge/Tauri-2-24c8db.svg?variant=secondary&size=xs&height=20" /></a>
+  <a href="https://github.com/EthanRodrigues001/moss/releases"><img alt="Latest version" height="16" src="https://shieldcn.dev/github/tag/EthanRodrigues001/moss.svg?variant=secondary&size=xs&height=16" /></a>
+  <a href="https://github.com/EthanRodrigues001/moss/releases"><img alt="Downloads" height="16" src="https://shieldcn.dev/github/downloads/EthanRodrigues001/moss.svg?variant=secondary&size=xs&height=16" /></a>
+  <a href="LICENSE"><img alt="MIT license" height="16" src="https://shieldcn.dev/github/license/EthanRodrigues001/moss.svg?variant=secondary&size=xs&height=16" /></a>
+  <a href="https://github.com/EthanRodrigues001/moss/actions/workflows/ci.yml"><img alt="CI" height="16" src="https://shieldcn.dev/github/ci/EthanRodrigues001/moss.svg?workflow=ci.yml&variant=secondary&size=xs&height=16" /></a>
+  <a href="#install"><img alt="Windows x64" height="16" src="https://shieldcn.dev/badge/Windows-x64-0078d4.svg?logo=windows&variant=secondary&size=xs&height=16" /></a>
+  <a href="https://tauri.app"><img alt="Built with Tauri 2" height="16" src="https://shieldcn.dev/badge/Tauri-2-24c8db.svg?variant=secondary&size=xs&height=16" /></a>
 </p>
 
 <p align="center">
