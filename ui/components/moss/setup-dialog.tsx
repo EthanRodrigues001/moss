@@ -138,7 +138,7 @@ function Body({ onTexChange, onTour, onOverleaf, onAgents, close }: Props & { cl
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/setup-banner.svg" alt="" aria-hidden draggable={false} className="pointer-events-none absolute inset-0 -z-10 size-full object-cover object-right" />
         <MossMark className="size-16" />
-        <div>
+        <div className="max-w-[46%]">
           <p className="text-xl font-semibold tracking-tight">Set up LaTeX</p>
           <p className="text-sm text-white/70">Moss compiles with a LaTeX install on this PC.</p>
         </div>

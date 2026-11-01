@@ -63,6 +63,17 @@ Moss checks GitHub for updates. A new release shows an update button in the side
 - **Overleaf sync.** Link a project, then Review, Pull, Push or Sync. Edits to different lines merge on their own; edits to the same lines open a conflict screen with Mine, Theirs or Both.
 - **Setup and tour.** One-click MiKTeX and Perl install, and a **Moss tour** project that compiles with citations so you can see it work.
 
+<table>
+  <tr>
+    <td width="50%"><img src=".github/assets/editor.png" alt="The Moss editor with the file tree and outline, the LaTeX source, and the compiled PDF beside it" /><br/><sub><b>Edit and compile.</b> Source on the left, the PDF on the right, errors and warnings under it.</sub></td>
+    <td width="50%"><img src=".github/assets/visual.png" alt="The visual editor showing the same file as formatted blocks" /><br/><sub><b>Visual editor.</b> The same file as blocks, with the equation editor one click away.</sub></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src=".github/assets/history.png" alt="The History tab showing the working copy and a side-by-side diff" /><br/><sub><b>History.</b> Every change is a restore point, with side-by-side diffs.</sub></td>
+    <td width="50%"><img src=".github/assets/overleaf.png" alt="The Connect to Overleaf dialog with three choices: create a new project, link an existing one, or try a practice copy" /><br/><sub><b>Overleaf.</b> Create, link, or try it with a practice copy first.</sub></td>
+  </tr>
+</table>
+
 ## AI agents
 
 `moss-mcp` is a separate program that speaks the Model Context Protocol over stdio. It installs next to Moss and exposes 46 tools: read, edit and write files, compile with structured diagnostics, view pages as images, undo and redo, and the Overleaf operations above.
