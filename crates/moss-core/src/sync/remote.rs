@@ -23,9 +23,23 @@ pub struct Fetched {
     pub skipped: Vec<Skipped>,
 }
 
+/// The newest edit the remote's own history knows about.
+#[derive(Debug, Clone, PartialEq, Eq, serde::Serialize)]
+pub struct RemoteEdit {
+    /// Display names of the people who made it.
+    pub users: Vec<String>,
+    /// Unix seconds.
+    pub at: i64,
+}
+
 pub trait Remote {
     /// Everything in the project, as one consistent snapshot.
     fn fetch(&self) -> Result<Fetched>;
+    /// When and by whom the remote was last edited, if it keeps a history. Used to notice a
+    /// download that lags behind live edits; `None` when unknown.
+    fn last_edit(&self) -> Option<RemoteEdit> {
+        None
+    }
     /// Create or replace a file, creating folders as needed.
     fn upload(&self, path: &str, bytes: &[u8]) -> Result<()>;
     fn delete(&self, path: &str) -> Result<()>;

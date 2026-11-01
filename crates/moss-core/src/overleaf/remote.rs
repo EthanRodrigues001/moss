@@ -9,7 +9,7 @@ use std::sync::Mutex;
 
 use super::{Client, RemoteKind, RemoteTree};
 use crate::sync::fileset::FileSet;
-use crate::sync::remote::{Fetched, Remote};
+use crate::sync::remote::{Fetched, Remote, RemoteEdit};
 use crate::{Error, Result};
 
 #[derive(Debug, Clone)]
@@ -95,6 +95,12 @@ impl Remote for OverleafRemote {
         let zip = self.client.download_zip(&self.project_id)?;
         let (files, skipped) = FileSet::from_zip(&zip)?;
         Ok(Fetched { files, skipped })
+    }
+
+    fn last_edit(&self) -> Option<RemoteEdit> {
+        let history = self.client.history(&self.project_id, None).ok()?;
+        let newest = history.updates.iter().max_by_key(|u| u.ended)?;
+        Some(RemoteEdit { users: newest.users.clone(), at: newest.ended })
     }
 
     fn upload(&self, path: &str, bytes: &[u8]) -> Result<()> {

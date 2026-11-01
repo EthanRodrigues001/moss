@@ -11,7 +11,7 @@ use super::lock::SyncLock;
 use super::plan::{
     Conflict, Decision, Entry, FileChoice, Item, Mode, Plan, Resolution, items_of, plan,
 };
-use super::remote::{Fetched, Remote};
+use super::remote::{Fetched, Remote, RemoteEdit};
 use crate::fsutil::{safe_join, write_bytes};
 use crate::history::{
     AUTHOR_OVERLEAF, AUTHOR_YOU, FileView, History, SnapshotInfo, Stats, VersionKind, view_of,
@@ -25,6 +25,9 @@ use crate::{Error, Result};
 const MASS_DELETE_MIN: usize = 5;
 const MASS_DELETE_PERCENT: usize = 30;
 const MOSS_AUTHOR: &str = "Moss";
+/// An Overleaf edit this much newer than the last Sync counts as "after" it (covers the clock
+/// difference and the time Moss's own Push takes to show up in Overleaf's history).
+const LAG_SLACK_SECS: i64 = 120;
 
 #[derive(Debug, Clone, Default, Serialize)]
 pub struct Summary {
@@ -65,6 +68,12 @@ pub struct Preview {
     /// A reason apply will refuse, such as Overleaf returning an empty project.
     pub blocked: Option<String>,
     pub summary: Summary,
+    /// Unix seconds when Overleaf was read for this Review.
+    pub checked_at: i64,
+    /// Files in the download, so "nothing changed" can be told from "nothing came back".
+    pub remote_files: usize,
+    /// The newest edit in Overleaf's own history, when it could be read.
+    pub remote_last_edit: Option<RemoteEdit>,
 }
 
 /// The three file sets behind a Preview, kept by the caller to answer "show me this file".
@@ -208,7 +217,16 @@ impl<'a> Syncer<'a> {
     pub fn preview(&self, mode: Mode) -> Result<(Preview, Staged)> {
         let g = self.gather()?;
         let planned = plan(&g.base, &g.local, &g.fetched.files, &g.fetched.skipped, mode);
-        let preview = self.describe(&planned, &g, mode, &[]);
+        let mut preview = self.describe(&planned, &g, mode, &[]);
+        preview.remote_last_edit = self.remote.last_edit();
+        if let Some(w) = lag_warning(
+            mode,
+            preview.summary.behind,
+            preview.remote_last_edit.as_ref(),
+            self.project.overleaf_link().and_then(|l| l.last_synced),
+        ) {
+            preview.warnings.push(w);
+        }
         Ok((preview, Staged { base: g.base, local: g.local, remote: g.fetched.files }))
     }
 
@@ -269,6 +287,9 @@ impl<'a> Syncer<'a> {
             mass_delete,
             blocked,
             summary,
+            checked_at: now_unix(),
+            remote_files: g.fetched.files.len(),
+            remote_last_edit: None,
         }
     }
 
@@ -718,6 +739,29 @@ fn remove_empty_parents(file: &Path, stop_at: &Path) {
         }
         d = dir.parent();
     }
+}
+
+/// Overleaf's history shows an edit after the last Sync, yet the download holds nothing new. The
+/// download is built from what Overleaf has saved, which can trail what someone just typed, so
+/// say so rather than reporting "up to date".
+fn lag_warning(mode: Mode, behind: usize, edit: Option<&RemoteEdit>, last_synced: Option<i64>) -> Option<String> {
+    if mode == Mode::Push || behind > 0 {
+        return None;
+    }
+    let (edit, synced) = (edit?, last_synced?);
+    if edit.at <= synced + LAG_SLACK_SECS {
+        return None;
+    }
+    let who = if edit.users.is_empty() { "someone".to_string() } else { edit.users.join(", ") };
+    let ago = (now_unix() - edit.at).max(0);
+    let when = match ago {
+        0..=89 => "moments ago".to_string(),
+        90..=5399 => format!("{} min ago", (ago + 30) / 60),
+        _ => format!("{} h ago", (ago + 1800) / 3600),
+    };
+    Some(format!(
+        "Overleaf's history shows an edit by {who} {when}, after your last Sync, but the download has nothing new. Overleaf can take a few minutes to save live edits; press Pull again shortly."
+    ))
 }
 
 /// `r<digest of Overleaf's files>.l<digest of this PC's files>`.

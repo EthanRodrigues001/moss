@@ -267,6 +267,9 @@ export type SyncPreview = {
   mass_delete: { side: "here" | "overleaf"; count: number; total: number } | null;
   blocked: string | null;
   summary: SyncSummary;
+  checked_at: number;
+  remote_files: number;
+  remote_last_edit: { users: string[]; at: number } | null;
 };
 
 export type ApplyRequest = {

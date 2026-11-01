@@ -237,6 +237,9 @@ export function mockSyncPreview(mode: SyncMode): SyncPreview {
       behind: 4,
       ahead: 4,
     },
+    checked_at: 0,
+    remote_files: 12,
+    remote_last_edit: null,
   };
 }
 

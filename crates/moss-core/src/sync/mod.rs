@@ -21,4 +21,4 @@ pub use engine::{
 };
 pub use fileset::{Blob, FileSet};
 pub use plan::{Conflict, ConflictKind, Direction, FileChoice, Item, Mode, Op, Resolution};
-pub use remote::{Fetched, FolderRemote, MemoryRemote, Remote};
+pub use remote::{Fetched, FolderRemote, MemoryRemote, Remote, RemoteEdit};

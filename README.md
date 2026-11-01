@@ -35,7 +35,7 @@ Online editors are convenient until you are offline, over a free plan's compile 
 - **Your TeX.** It compiles with the MiKTeX or TeX Live you already have, or installs MiKTeX for you in one click.
 - **Safe for agents.** Every agent change takes a restore point first, and deleting files waits for your Approval.
 
-Moss does not host anything, run a cloud compiler, or use Overleaf's official API (Overleaf has none on the free plan). It is Windows only.
+Moss does not host anything, run a cloud compiler, or use Overleaf's official Git or Dropbox sync (those are paid features). Sync goes through Overleaf's web session instead, which Overleaf does not support and which may conflict with its Terms of Service. It is Windows only.
 
 > [!NOTE]
 > **Status:** beta, version 0.1.0-beta.1. Overleaf sync is built and tested against a stand-in folder, but **not yet checked against a live Overleaf account**, and it uses Overleaf's unofficial web session, so Overleaf changing its site can break it. The one-click LaTeX setup has not yet been run on a clean PC.

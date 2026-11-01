@@ -824,3 +824,85 @@ fn a_second_sync_on_the_same_project_is_refused_until_the_first_finishes() {
     assert!(matches!(e.apply_with(&e.remote, &e.request(&p)).unwrap(), Applied::Done { .. }));
     assert_eq!(e.remote.text("main.tex").as_deref(), Some("LOCAL\nline2\nline3\nline4\nline5\n"));
 }
+
+/// Overleaf as seen right after a collaborator typed: its history knows the edit, but the
+/// download (built from saved content) does not have it yet.
+struct Lagging {
+    inner: MemoryRemote,
+    edit: Option<RemoteEdit>,
+}
+
+impl Remote for Lagging {
+    fn fetch(&self) -> Result<Fetched> {
+        self.inner.fetch()
+    }
+    fn last_edit(&self) -> Option<RemoteEdit> {
+        self.edit.clone()
+    }
+    fn upload(&self, path: &str, bytes: &[u8]) -> Result<()> {
+        self.inner.upload(path, bytes)
+    }
+    fn delete(&self, path: &str) -> Result<()> {
+        self.inner.delete(path)
+    }
+    fn rename(&self, from: &str, to: &str) -> Result<()> {
+        self.inner.rename(from, to)
+    }
+}
+
+fn synced_at(e: &Env, when: i64) {
+    e.project
+        .link_overleaf(&OverleafLink { project_id: "p1".into(), name: "Test".into(), last_synced: Some(when) })
+        .unwrap();
+}
+
+#[test]
+fn a_download_that_lags_a_collaborators_edit_is_not_reported_as_up_to_date() {
+    let e = env(&[("main.tex", DOC)]);
+    let now = crate::project::now_unix();
+    synced_at(&e, now - 3600);
+    let remote = Lagging {
+        inner: e.remote.clone(),
+        edit: Some(RemoteEdit { users: vec!["Sam".into()], at: now - 30 }),
+    };
+
+    let p = e.preview_with(&remote, Mode::Pull);
+    assert_eq!(p.summary.behind, 0, "the download really has nothing new");
+    assert_eq!(p.remote_files, 1);
+    assert_eq!(p.remote_last_edit.as_ref().map(|x| x.users.clone()), Some(vec!["Sam".to_string()]));
+    let warning = p.warnings.iter().find(|w| w.contains("Sam")).expect("a lag warning");
+    assert!(warning.contains("Pull again"), "{warning}");
+}
+
+#[test]
+fn no_lag_warning_when_the_edit_was_already_synced_or_the_pull_has_changes() {
+    let e = env(&[("main.tex", DOC)]);
+    let now = crate::project::now_unix();
+
+    // The newest Overleaf edit is older than the last Sync: nothing is missing.
+    synced_at(&e, now - 60);
+    let old = Lagging { inner: e.remote.clone(), edit: Some(RemoteEdit { users: vec![], at: now - 600 }) };
+    assert!(e.preview_with(&old, Mode::Pull).warnings.is_empty());
+
+    // The download did bring changes: the Review already shows them.
+    synced_at(&e, now - 3600);
+    e.remote.put("main.tex", b"changed\n");
+    let fresh = Lagging { inner: e.remote.clone(), edit: Some(RemoteEdit { users: vec![], at: now - 30 }) };
+    let p = e.preview_with(&fresh, Mode::Pull);
+    assert_eq!(p.summary.behind, 1);
+    assert!(p.warnings.is_empty());
+
+    // A Push does not read what Overleaf holds as news, so it stays quiet too.
+    e.remote.put("main.tex", DOC.as_bytes());
+    let lag = Lagging { inner: e.remote.clone(), edit: Some(RemoteEdit { users: vec![], at: now - 30 }) };
+    assert!(e.preview_with(&lag, Mode::Push).warnings.is_empty());
+}
+
+#[test]
+fn a_remote_without_history_gives_no_lag_warning() {
+    let e = env(&[("main.tex", DOC)]);
+    synced_at(&e, 1);
+    let p = e.preview(Mode::Pull);
+    assert!(p.remote_last_edit.is_none());
+    assert!(p.warnings.is_empty());
+}

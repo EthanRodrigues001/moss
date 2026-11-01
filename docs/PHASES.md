@@ -88,7 +88,11 @@ Sidebar (row buttons, last edited, filter, collapsed Archive, icon-only footer),
 - [ ] **User**: how to handle the existing old `moss` repo (see plan), visibility, yes to the first commit. Then LICENSE, README, CONTRIBUTING, SECURITY, CHANGELOG, templates; `ci.yml`, `release.yml`; rename `master` to `main`; draft `v0.1.0-beta.1` pre-release. Full checklist in the plan file.
 
 ## Plan 2: sync freshness and layout tools (plan: `docs/plans/m5-agent-feedback-and-sync-freshness.md`)
-- [ ] Phase 12 - Sync freshness: reproduce the missed collaborator edit (ask the user first), live cross-check via the socket, never-silent review fields, tests.
+- [~] Phase 12 - Sync freshness (partly done 2026-10-30).
+  - [x] `Remote::last_edit` (Overleaf: newest entry of its own history); `Preview` gains `checked_at`, `remote_files`, `remote_last_edit`; a Pull/Sync Review whose download has nothing new but whose history shows an edit after the last Sync now warns "Overleaf can take a few minutes to save live edits; press Pull again". 3 new tests; `cargo test -p moss-core sync` (62), `cargo check --workspace`, `tsc` pass. NOT run against live Overleaf.
+  - [ ] Live reproduction with a second editor (needs the user in the browser) to confirm the zip lags live edits; the cause is still a theory.
+  - [ ] Live cross-check with `joinDoc` over the socket (use live text when it differs from the zip); only worth building if the live run confirms the lag.
+  - [ ] "Why is nothing changing?" link and skipped-file reasons in the Review; MCP `overleaf_review` already carries the new fields.
 - [ ] Phase 13 - `compile` page count and delta; `page_text` with `fill_ratio`; `fit`.
 - [ ] Phase 14 - `figures` report and missing-figure list; bib lint in `references`.
 - [ ] Phase 15 - `measure`.
